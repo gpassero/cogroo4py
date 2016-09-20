@@ -7,14 +7,21 @@ Uma interface para acessar o analisador morfológico do CoGrOO em Python.
  - Java Runtime Environment v 8+
 
 # Como usar
+Baixe os arquivos cogroo_interface.py e setup.py e instale o pacote com o comando:
+
+    python setup.py install
+
+Se preferir, instale a partir do GitHub pelo pip:
+
+    pip install git+https://github.com/gpassero/CoGrOO4Py.git
+
 É necessário executar o arquivo cogroo4py.jar para ativar o Socket que permitirá a comunicação do Python com a JVM através do py4j. Todos os componentes do CoGrOO necessários (v 4) já estão nesse pacote.
 
     java -jar cogroo4py.jar
+    Gateway Server Started
 
-Após isso, em uma IDE Python de sua preferência (ex. IPython, Spyder), posicione-se no diretório onde está o arquivo cogroo_interface.py, importe a classe Cogroo e a instancie:
+Após isso, em uma IDE Python de sua preferência (ex. IPython, Spyder), importe e instancie a classe Cogroo.
 
-    import os
-    os.chdir('/usr/share/cogroo4j')
     from cogroo_interface import Cogroo
     cogroo = Cogroo.Instance()
 
