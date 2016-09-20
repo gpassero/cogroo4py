@@ -13,7 +13,7 @@ Baixe os arquivos cogroo_interface.py e setup.py e instale o pacote com o comand
 
 Se preferir, instale a partir do GitHub pelo pip:
 
-    pip install git+https://github.com/gpassero/CoGrOO4Py.git
+    pip install git+https://github.com/gpassero/cogroo4py.git
 
 É necessário executar o arquivo cogroo4py.jar para ativar o Socket que permitirá a comunicação do Python com a JVM através do py4j. Todos os componentes do CoGrOO necessários (v 4) já estão nesse pacote.
 
@@ -31,6 +31,7 @@ Abaixo estão alguns exemplos de uso:
 
     cogroo.lemmatize('Estas laranjas estão deliciosas.')
       este laranja estar delicioso.
+      
     doc = cogroo.analyze('Estas laranjas estão deliciosas.')
     doc.sentences[0].tokens
       [Estas#pron-det F=P,
@@ -41,4 +42,4 @@ Abaixo estão alguns exemplos de uso:
        
     doc = cogroo.chunk_tag('Estas laranjas estão deliciosas.')
       'NP[Estas laranjas esto deliciosas]'
-    
+ 
