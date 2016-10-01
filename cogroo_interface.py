@@ -47,11 +47,11 @@ class Singleton:
     def __instancecheck__(self, inst):
         return isinstance(inst, self._decorated)
 
-		
+
 def find(pattern, text):
     return [(i.start(), i.end()) for i in re.finditer(pattern, text)]
 
-	
+
 class Token:
     def __init__(self, cogroo_token):
         self.lemmas = list(cogroo_token.getLemmas())
@@ -151,8 +151,32 @@ class Document:
 
             self.paragraphs[-1].append(sentence)
 
+        if cogroo_doc.getClass().getSimpleName() == 'CheckDocument':
+            self.mistakes = []
+            for cogroo_mistake in cogroo_doc.getMistakes():
+                self.mistakes.append(Mistake(cogroo_mistake))
+
+
     def __repr__(self):
         return self.text
+
+
+class Mistake:
+
+    def __init__(self, cogroo_mistake):
+        self.rule_id = cogroo_mistake.getRuleIdentifier()
+        self.short_msg = cogroo_mistake.getShortMessage()
+        self.long_msg = cogroo_mistake.getLongMessage()
+        self.full_msg = cogroo_mistake.getFullMessage()
+        suggestions = cogroo_mistake.getSuggestions()
+        self.suggestions = [s for s in suggestions]
+        self.start = cogroo_mistake.getStart()
+        self.end = cogroo_mistake.getEnd()
+        self.context = cogroo_mistake.getContext()
+        self.rule_priority = cogroo_mistake.getRulePriority()
+
+    def __repr__(self):
+        return '[{0}] {1}'.format(self.rule_id, self.short_msg)
 
 
 @Singleton
@@ -168,13 +192,12 @@ class Cogroo:
 
     @lru_cache(maxsize=5000)
     def analyze(self, text):
-        text = re.sub('[ ]+\n', '', text)
-        text = re.sub(r'([^.])\n', r'\1.\n', text)
-        text = re.sub(r'([?.,:;])(\S)', r'\1 \2', text)
+        text = self._preproc(text)
         try:
             doc = self.analyzer.analyze(text)
         except:
             try:
+                #TODO check this workaround for better solution
                 text = re.sub(', e a', ', E a', text)
                 doc = self.analyzer.analyze(text)
             except:
@@ -182,6 +205,23 @@ class Cogroo:
 
         return Document(doc)
 
+    def grammar_check(self, text):
+        text = self._preproc(text)
+        try:
+            doc = self.analyzer.grammarCheck(text)
+        except:
+            print('Couldn\'t grammar check ' + text)
+
+        return Document(doc)
+
+    def _preproc(self, text):
+        # Trim sentences
+        text = re.sub('[ ]+\n', '', text)
+        # Add missing final dots
+        text = re.sub(r'([^.])\n', r'\1.\n', text)
+        # Add missing spaces
+        text = re.sub(r'([?.,:;])(\S)', r'\1 \2', text)
+        return text
 
     def lemmatize(self, text):
         if text is None or text == '':
