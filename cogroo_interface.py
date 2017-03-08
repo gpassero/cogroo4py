@@ -207,6 +207,7 @@ class Cogroo:
 
     def grammar_check(self, text):
         text = self._preproc(text)
+        doc = None
         try:
             doc = self.analyzer.grammarCheck(text)
         except:
@@ -218,9 +219,9 @@ class Cogroo:
         # Trim sentences
         text = re.sub('[ ]+\n', '', text)
         # Add missing final dots
-        text = re.sub(r'([^.])\n', r'\1.\n', text)
+        text = re.sub(r'([^.?!])\n', r'\1.\n', text)
         # Add missing spaces
-        text = re.sub(r'([?.,:;])(\S)', r'\1 \2', text)
+        text = re.sub(r'([?!.,:;])(\S)', r'\1 \2', text)
         return text
 
     def lemmatize(self, text):
