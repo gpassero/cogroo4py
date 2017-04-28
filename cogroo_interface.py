@@ -6,7 +6,12 @@ Created on Sat Sep  3 21:21:19 2016
 """
 from py4j.java_gateway import JavaGateway
 from functools import lru_cache
+import logging
 import re
+
+
+LOGGER = logging.getLogger(__name__)
+
 
 class Singleton:
     """
@@ -201,7 +206,8 @@ class Cogroo:
                 text = re.sub(', e a', ', E a', text)
                 doc = self.analyzer.analyze(text)
             except:
-                doc = None
+                LOGGER.error('Couldn\'t connect with CoGrOO. Is it running?')
+                return None
 
         return Document(doc)
 
@@ -210,8 +216,9 @@ class Cogroo:
         doc = None
         try:
             doc = self.analyzer.grammarCheck(text)
-        except:
-            print('Couldn\'t grammar check ' + text)
+        except:			
+            LOGGER.error('Couldn\'t connect with CoGrOO for grammar check. Is it running?')
+            return None
 
         return Document(doc)
 
