@@ -4,7 +4,7 @@ Uma interface para acessar o analisador morfológico e o corretor gramatical do 
 # Pré-requisitos
  - interpretador Python 3.x
  - Pacote py4j (*pip install py4j*)
- - Java Runtime Environment 8+
+ - Java Runtime Environment 8
 
 # Como usar
 Baixe os arquivos **cogroo_interface.py** e **setup.py** e instale o pacote com o comando:
