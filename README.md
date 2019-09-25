@@ -1,32 +1,24 @@
 # CoGrOO4Py
+[![Build Status](https://travis-ci.org/kevencarneiro/cogroo4py.svg?branch=master)](https://travis-ci.org/kevencarneiro/cogroo4py)
+[![codecov](https://codecov.io/gh/kevencarneiro/cogroo4py/branch/master/graph/badge.svg)](https://codecov.io/gh/kevencarneiro/cogroo4py)
+[![PyPI version](https://badge.fury.io/py/cogroo-interface.svg)](https://badge.fury.io/py/cogroo-interface)
+
 Uma interface para acessar o analisador morfológico e o corretor gramatical do CoGrOO em Python.
 
 # Pré-requisitos
  - interpretador Python 3.x
- - Pacote py4j (*pip install py4j*)
  - Java Runtime Environment 8
 
 # Como usar
-Baixe os arquivos **cogroo_interface.py** e **setup.py** e instale o pacote com o comando:
+Instale usando o pip:
 
 ```
-    python setup.py install
+    pip install cogroo_interface
 ```
 
-Se preferir, instale a partir do GitHub pelo pip:
+É necessário que o executável `java` esteja definido em seu `path`
 
-```
-    pip install git+https://github.com/gpassero/cogroo4py.git
-```
-
-É necessário executar o arquivo **cogroo4py.jar** para ativar o Socket que permitirá a comunicação do Python com a JVM através do py4j. Todos os componentes do CoGrOO 4 necessários já estão nesse pacote.
-
-```
-    java -jar cogroo4py.jar
-    Gateway Server Started
-```
-
-Após isso, em uma IDE Python de sua preferência (ex. IPython, Spyder), importe e instancie a classe *Cogroo*.
+Em uma IDE Python de sua preferência (ex. IPython, Spyder), importe e instancie a classe *Cogroo*.
 
 ```python
     from cogroo_interface import Cogroo

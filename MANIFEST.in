@@ -1,0 +1,4 @@
+# Manifest syntax https://docs.python.org/2/distutils/sourcedist.html
+recursive-include cogroo_interface *.jar *.py
+prune cogroo_interface/test*
+include MANIFEST.in
