@@ -1,0 +1,9 @@
+.vscode/
+__pycache__
+build/
+server/.settings/
+server/bin/
+server/META-INF/
+server/target/
+server/.classpath
+server/.project
