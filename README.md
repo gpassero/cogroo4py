@@ -64,7 +64,7 @@ Um arquivo jar será gerado na pasta `server/target` que equivale ao arquivo `co
 A lematização consiste em obter o lema das palavras de um texto. O lema é uma versão da palavra que representa todas as suas flexões. Os verbos são alterados para o infinitivo e substantivos e adjetivos são flexionados para o masculino do singular.
 
 		[estava, estaria, estive, estarei, estar] => estar
-		[fui, vou, ire, iremos] => ir
+		[fui, vou, irei, iremos] => ir
 		[gato, gatinho, gatão, gata, gatos] => gato
 
 A lematização é uma alternativa ao *stemming*, um algoritmo que tenta detectar sufixos e removê-los com base nas regras comuns da língua, mas que falha em tratar exceções. A lematização, diferentemente do *stemming*, usa um dicionário morfológico para encontrar o radical das palavras.
