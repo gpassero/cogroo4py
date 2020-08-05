@@ -47,7 +47,6 @@ WARNING: All illegal access operations will be denied in a future release
 ```
 
 Esse aviso é exibido por causa do problema descrito [neste issue da biblioteca py4j](https://github.com/bartdag/py4j/issues/314) e não afeta o funcionamento do programa.
-Assim que o problema for tratado na biblioteca py4j atualizarei o servidor Java aqui.
 
 ## Recompilar servidor Java
 
