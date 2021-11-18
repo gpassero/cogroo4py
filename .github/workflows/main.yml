@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.6", "3.7", "3.8", "3.9"]
-        java-version: ["openjdk8", "openjdk11"]
+        java-version: ["8", "11", "15", "17"]
 
     steps:
       - uses: actions/checkout@v2
@@ -17,7 +17,11 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Set up JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@v2
+        with:
           java-version: ${{ matrix.java-version }}
+          distribution: 'adopt'
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
