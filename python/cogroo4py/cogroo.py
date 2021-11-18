@@ -4,30 +4,36 @@ Created on Sat Sep  3 21:21:19 2016
 
 @author: Guilherme Passero <guilherme.passero0@gmail.com>
 """
-import cogroo4py.jpype_config  # noqa
-import inspect
-import os
 
-from functools import lru_cache
 import logging
 import re
-import subprocess
+from functools import lru_cache
 
-from retry import retry
+from deprecated.classic import deprecated
 
+import cogroo4py.jpype_config  # noqa
 from java.util import Locale
 from org.cogroo.analyzer import ComponentFactory
 from org.cogroo.checker import GrammarChecker, CheckDocument
+from org.cogroo.text import Chunk as CogrooChunk
 from org.cogroo.text import Document as CogrooDocument
 from org.cogroo.text import Sentence as CogrooSentence
 from org.cogroo.text import Token as CogrooToken
-from org.cogroo.text import Chunk as CogrooChunk
 from org.cogroo.text.impl import DocumentImpl
 
 LOGGER = logging.getLogger(__name__)
 
 
-class CogrooAnalyzer:
+class Singleton(type):
+    _instances = {}
+
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+
+class CogrooAnalyzer(metaclass=Singleton):
     def __init__(self):
         self._cogroo = ComponentFactory.create(Locale('pt', 'BR')).createPipe()
         self._grammar_checker = GrammarChecker(self._cogroo)
@@ -42,6 +48,9 @@ class CogrooAnalyzer:
         document = CheckDocument(text)
         self._grammar_checker.analyze(document)
         return document
+
+    def grammarCheck(self, text: str) -> CogrooDocument:  # noqa
+        return self.grammar_check(text)
 
 
 def find(pattern, text):
@@ -66,13 +75,14 @@ class Token:
         self.feat = cogroo_token.getFeatures()
         self.start = cogroo_token.getStart()
         self.end = cogroo_token.getEnd()
-# TODO analyze when number to string conversion may be useful
-#        if self.pos == 'num' and re.match('\d+[.,]?\d*', self.lemma):
-#            try:
-#                num = float(self.lemma.replace(',', '.'))
-#                self.lemma = num2words(num, lang='pt_BR')
-#            except:
-#                print('Couldn\'t convert ' + self.lemma + ' to number.')
+
+    # TODO analyze when number to string conversion may be useful
+    #        if self.pos == 'num' and re.match('\d+[.,]?\d*', self.lemma):
+    #            try:
+    #                num = float(self.lemma.replace(',', '.'))
+    #                self.lemma = num2words(num, lang='pt_BR')
+    #            except:
+    #                print('Couldn\'t convert ' + self.lemma + ' to number.')
 
     def __repr__(self):
         return '{0}#{1} {2}'.format(self.lexeme, self.pos, self.feat)
@@ -138,7 +148,6 @@ class Document:
             self.sentences.append(Sentence(sentence, paragraph))
             last_sent_end = sentence.getEnd()
 
-
         self.paragraphs = []
         for sentence in self.sentences:
             p = sentence.paragraph
@@ -151,7 +160,6 @@ class Document:
             self.mistakes = []
             for cogroo_mistake in cogroo_doc.getMistakes():
                 self.mistakes.append(Mistake(cogroo_mistake))
-
 
     def __repr__(self):
         return self.text
@@ -176,15 +184,14 @@ class Mistake:
 
 
 class Cogroo:
-    _analyzer = None
+    _analyzer = CogrooAnalyzer()
 
     @property
     def analyzer(self) -> CogrooAnalyzer:
-        if not self._analyzer:
-            self._analyzer = CogrooAnalyzer()
         return self._analyzer
 
     @staticmethod
+    @deprecated(version='0.4.0', reason='You should instantiate Cogroo() directly')
     def Instance():
         return Cogroo()
 
@@ -194,24 +201,17 @@ class Cogroo:
         try:
             doc = self.analyzer.analyze(text)
         except:
-            try:
-                #TODO check this workaround for better solution
-                text = re.sub(', e a', ', E a', text)
-                doc = self.analyzer.analyze(text)
-            except:
-                LOGGER.error('Couldn\'t connect with CoGrOO. Is it running?')
-                return None
+            # TODO check this workaround for better solution
+            text = re.sub(', e a', ', E a', text)
+            doc = self.analyzer.analyze(text)
 
         return Document(doc)
 
+    @lru_cache(maxsize=5000)
     def grammar_check(self, text):
         text = self._preproc(text)
         doc = None
-        try:
-            doc = self.analyzer.grammarCheck(text)
-        except:			
-            LOGGER.error('Couldn\'t connect with CoGrOO for grammar check. Is it running?')
-            return None
+        doc = self.analyzer.grammarCheck(text)
 
         return Document(doc)
 
@@ -247,9 +247,7 @@ class Cogroo:
 
             last_paragraph = sentence.paragraph
 
-
         return ' '.join(ret)
-
 
     def pos_tag(self, text):
         if text is None or text == '':
@@ -269,7 +267,6 @@ class Cogroo:
                 ret.append(token.lexeme + '#' + token.pos)
 
         return ' '.join(ret)
-
 
     def chunk_tag(self, text, type_='normal'):
         if text is None or text == '':
@@ -385,9 +382,9 @@ class Cogroo:
 
 
 def main():
-    cogroo = Cogroo.Instance()
-    print(cogroo.lemmatize('o entendimento das metas propostas oferece uma interessante oportunidade para ' +
-                           'verificação do impacto na agilidade decisória'))
+    cogroo = Cogroo()
+    cogroo.lemmatize('o entendimento das metas propostas oferece uma interessante oportunidade para ' +
+                     'verificação do impacto na agilidade decisória')
 
 
 if __name__ == '__main__':

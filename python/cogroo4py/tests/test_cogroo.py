@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from cogroo_interface import Cogroo
+from cogroo4py.cogroo import Cogroo
 
 
 def test_lemmatize():

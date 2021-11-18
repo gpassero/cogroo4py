@@ -1,4 +1,18 @@
+import os
 from setuptools import setup
+
+
+def package_files(directory):
+    paths = []
+    for (path, directories, filenames) in os.walk(directory):
+        for filename in filenames:
+            paths.append(os.path.join('..', path, filename))
+    return paths
+
+
+java_stubs_paths = package_files('java-stubs') + ['../py.typed']
+jpype_stubs_paths = package_files('jpype-stubs') + ['../py.typed']
+org_stubs_paths = package_files('org-stubs') + ['../py.typed']
 
 setup(name='cogroo4py',
       version='0.4.0',
@@ -7,9 +21,20 @@ setup(name='cogroo4py',
       author_email='guilherme.passero0@gmail.com',
       url='https://github.com/kevencarneiro/cogroo4py',
       include_package_data=True,
-      packages=['cogroo_interface', 'cogroo4py'],
-      package_dir={'cogroo_interface': 'cogroo_interface'},
-      package_data={'cogroo_interface': ['cogroo4py.jar'], 'cogroo4py': ['jars/*.jar']},
+      packages=['cogroo_interface', 'cogroo4py', 'java-stubs', 'jpype-stubs', 'org-stubs'],
+      package_dir={
+          'cogroo_interface': 'cogroo_interface',
+          'cogroo4py': 'cogroo4py',
+          'java-stubs': 'java-stubs',
+          'jpype-stubs': 'jpype-stubs',
+          'org-stubs': 'org-stubs'
+      },
+      package_data={
+          'cogroo4py': ['jars/*.jar'],
+          'java-stubs': java_stubs_paths,
+          'jpype-stubs': jpype_stubs_paths,
+          'org-stubs': org_stubs_paths
+      },
       # py_modules=['cogroo_interface'],
       install_requires=['JPype1==1.3.0', 'Deprecated==1.2.13'],
       extras_require={

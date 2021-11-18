@@ -1,14 +1,25 @@
 language: java
-jdk:
-  - openjdk8
-python:
-  - 3.6.7
+jobs:
+  include:
+    - jdk:
+      - openjdk8
+      - openjdk11
+      - openjdk13
+      - openjdk15
+      - openjdk17
+    - python:
+      - 3.6
+      - 3.7
+      - 3.8
+      - 3.9
+      - 3.10
 before_install:
-  - pyenv shell 3.6.7
+  - pyenv shell
+  - cd python
 install:
   - pip install pytest-cov pytest codecov
 script:
   - python setup.py install
-  - py.test --cov-report term --cov=cogroo_interface
+  - py.test --cov-report term --cov=cogroo4py
 after_success:
   - codecov

@@ -101,6 +101,29 @@ O corretor gramatical do CoGrOO verifica a colocação pronominal, concordância
 	# [[xml:124] O adjetivo na função de predicativo concorda com o sujeito.]
 ```
 
+# Contribuindo
+
+Este projeto utiliza o jpype para se comunicar com a Java Native Interface (JNI) e utilizar as classes do Cogroo
+
+Requirements:
+* Java 8
+
+## Configuração do ambiente de desenvolvimento
+* É recomendável utilizar um virtual environment (venv)
+* Na raiz do projeto python, execute o comando `pip install -e .[dev]`
+
+## Atualizando as dependências do Java
+* `cd java`
+* `mvn package`
+
+Este comando irá atualizar o arquivo `/python/cogroo4py/jars/Cogroo4PyBridge.jar`
+
+## Regerando os stubs python
+* `cd python/cogroo4py`
+* `python generate_stubs.py`
+
+Os stubs servirão para o autocomplete das classes Java utilizadas dentro do python
+
 # Sobre o CoGrOO 
 Código fonte e informações sobre o projeto:
 http://cogroo.sourceforge.net/
