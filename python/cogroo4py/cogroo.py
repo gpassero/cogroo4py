@@ -45,7 +45,8 @@ class CogrooAnalyzer(metaclass=Singleton):
         return document
 
     def grammar_check(self, text: str) -> CogrooDocument:
-        document = CheckDocument(text)
+        document = CheckDocument()
+        document.setText(text)
         self._grammar_checker.analyze(document)
         return document
 
