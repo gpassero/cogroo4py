@@ -1,0 +1,36 @@
+import org.apache.log4j.or_.jms
+import org.apache.log4j.or_.sax
+import org.apache.log4j.spi
+import typing
+
+
+
+class ObjectRenderer:
+    def doRender(self, object: typing.Any) -> str: ...
+
+class RendererMap:
+    def __init__(self): ...
+    @staticmethod
+    def addRenderer(rendererSupport: org.apache.log4j.spi.RendererSupport, string: str, string2: str) -> None: ...
+    def clear(self) -> None: ...
+    def findAndRender(self, object: typing.Any) -> str: ...
+    @typing.overload
+    def get(self, class_: typing.Type) -> ObjectRenderer: ...
+    @typing.overload
+    def get(self, object: typing.Any) -> ObjectRenderer: ...
+    def getDefaultRenderer(self) -> ObjectRenderer: ...
+    def put(self, class_: typing.Type, objectRenderer: ObjectRenderer) -> None: ...
+
+class ThreadGroupRenderer(ObjectRenderer):
+    def __init__(self): ...
+    def doRender(self, object: typing.Any) -> str: ...
+
+
+class __module_protocol__(typing.Protocol):
+    # A module protocol which reflects the result of ``jp.JPackage("org.apache.log4j.or_")``.
+
+    ObjectRenderer: typing.Type[ObjectRenderer]
+    RendererMap: typing.Type[RendererMap]
+    ThreadGroupRenderer: typing.Type[ThreadGroupRenderer]
+    jms: org.apache.log4j.or_.jms.__module_protocol__
+    sax: org.apache.log4j.or_.sax.__module_protocol__
