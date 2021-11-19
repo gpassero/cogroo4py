@@ -7,7 +7,7 @@ Uma interface para acessar o analisador morfológico e o corretor gramatical do 
 
 # Pré-requisitos
  - interpretador Python 3.x
- - Java Runtime Environment (Testado nas versões 8, 11, 15 e 17)
+ - Java Runtime Environment (Testado nas versões 8, 11 e 17)
 
 # Como usar
 Instale usando o pip:

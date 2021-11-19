@@ -11,4 +11,5 @@
 **/.idea/*
 
 java/target/**/*
+python/cogroo4py/jars/**/*
 python/wheels/**/*

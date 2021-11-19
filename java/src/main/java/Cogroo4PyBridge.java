@@ -18,6 +18,7 @@ public class Cogroo4PyBridge {
 
     public static void main(String[] args) throws IllegalArgumentException, IOException {
         Cogroo4PyBridge app = new Cogroo4PyBridge();
+        System.out.println(app.grammarCheck("Elas são bonita"));
     }
 
     public Cogroo4PyBridge() throws IllegalArgumentException, IOException {

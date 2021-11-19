@@ -1,6 +1,10 @@
 name: Tests
 
-on: [push]
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   test:
@@ -8,7 +12,7 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.6", "3.7", "3.8", "3.9", "3.10"]
-        java-version: ["8", "11", "15", "17"]
+        java-version: ["8", "11", "17"]
 
     steps:
       - uses: actions/checkout@v2
@@ -21,6 +25,12 @@ jobs:
         with:
           java-version: ${{ matrix.java-version }}
           distribution: 'adopt'
+      - name: Verify vulnerabilities with Maven
+        working-directory: java
+        run: mvn verify
+      - name: Package with Maven
+        working-directory: java
+        run: mvn package
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
