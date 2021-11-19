@@ -15,8 +15,8 @@ jpype_stubs_paths = package_files('jpype-stubs') + ['../py.typed']
 org_stubs_paths = package_files('org-stubs') + ['../py.typed']
 
 setup(name='cogroo4py',
-      version='0.4.0',
-      description='Interface for accessing CoGrOO from Python scripts using py4j',
+      version='0.4.1',
+      description='Interface for accessing CoGrOO from Python scripts using jpype',
       author='Guilherme Passero',
       author_email='guilherme.passero0@gmail.com',
       url='https://github.com/kevencarneiro/cogroo4py',
@@ -29,13 +29,13 @@ setup(name='cogroo4py',
           'jpype-stubs': 'jpype-stubs',
           'org-stubs': 'org-stubs'
       },
+      
       package_data={
-          'cogroo4py': ['jars/*.jar'],
+          'cogroo4py': ['jars/*.jar', '../../README.md'],
           'java-stubs': java_stubs_paths,
           'jpype-stubs': jpype_stubs_paths,
           'org-stubs': org_stubs_paths
       },
-      # py_modules=['cogroo_interface'],
       install_requires=['JPype1==1.3.0', 'Deprecated==1.2.13'],
       extras_require={
           'dev': ['stubgenj==0.2.5']

@@ -1,17 +1,13 @@
 name: Publish
 
 on:
-  workflow_run:
-    workflows: ["Tests"]
-    types: [completed]
   push:
     tags:
       - 'v*'
 
 jobs:
-  on-success:
+  publish:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.6
@@ -34,11 +30,4 @@ jobs:
         with:
           user: __token__
           password: ${{ secrets.PYPI_API_TOKEN }}
-          packages_dir: python/dist
-      - name: Publish a Python distribution to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          user: __token__
-          password: ${{ secrets.PYPI_API_TOKEN }}
-          repository_url: https://pypi.org/project/cogroo-interface/
           packages_dir: python/dist

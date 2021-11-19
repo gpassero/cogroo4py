@@ -1,7 +1,7 @@
 # CoGrOO4Py
 [![Build Status](https://github.com/kevencarneiro/cogroo4py/actions/workflows/main.yml/badge.svg)](https://github.com/kevencarneiro/cogroo4py/actions/workflows/main.yml)
 [![codecov](https://codecov.io/gh/kevencarneiro/cogroo4py/branch/master/graph/badge.svg)](https://codecov.io/gh/kevencarneiro/cogroo4py)
-[![PyPI version](https://badge.fury.io/py/cogroo-interface.svg)](https://badge.fury.io/py/cogroo-interface)
+[![PyPI version](https://badge.fury.io/py/cogroo4py.svg)](https://badge.fury.io/py/cogroo4py)
 
 Uma interface para acessar o analisador morfológico e o corretor gramatical do CoGrOO em Python.
 
