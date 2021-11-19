@@ -1,5 +1,5 @@
 # CoGrOO4Py
-[![Build Status](https://travis-ci.org/kevencarneiro/cogroo4py.svg?branch=master)](https://travis-ci.org/kevencarneiro/cogroo4py)
+[![Build Status](https://github.com/kevencarneiro/cogroo4py/actions/workflows/main.yml/badge.svg)](https://github.com/kevencarneiro/cogroo4py/actions/workflows/main.yml)
 [![codecov](https://codecov.io/gh/kevencarneiro/cogroo4py/branch/master/graph/badge.svg)](https://codecov.io/gh/kevencarneiro/cogroo4py)
 [![PyPI version](https://badge.fury.io/py/cogroo-interface.svg)](https://badge.fury.io/py/cogroo-interface)
 
@@ -7,13 +7,13 @@ Uma interface para acessar o analisador morfológico e o corretor gramatical do 
 
 # Pré-requisitos
  - interpretador Python 3.x
- - Java Runtime Environment 8
+ - Java Runtime Environment (Testado nas versões 8, 11, 15 e 17)
 
 # Como usar
 Instale usando o pip:
 
 ```
-    pip install cogroo_interface
+    pip install cogroo4py
 ```
 
 É necessário que o executável `java` esteja definido em seu `path`
@@ -21,8 +21,8 @@ Instale usando o pip:
 Em uma IDE Python de sua preferência (ex. IPython, Spyder), importe e instancie a classe *Cogroo*.
 
 ```python
-    from cogroo_interface import Cogroo
-    cogroo = Cogroo.Instance()
+    from cogroo4py.cogroo import Cogroo
+    cogroo = Cogroo()
 ```
 
 Agora você já pode usar os recursos do CoGrOO. Esta interface disponibiliza métodos para retornar uma análise morfológica completa de um documento, lematizar, identificar partes do discurso, dividir em chunks e verificar erros gramaticais. 
@@ -47,32 +47,30 @@ A análise morfológica consiste em identificar a classe gramatical das palavras
 O método de análise morfológica do CoGrOO usa etiquetas (*tags*) específicas para cada caso, que podem ser difíceis de entender em um primeiro momento. O dicionário *pos_tags* da classe **Cogroo** permite traduzir as etiquetas geradas pelo CoGrOO para um formato legível em português:
 
 ```python
-    def _pos_tags(self):
-        pos = {}
-        pos.update({"n": "substantivo"})
-        pos.update({"prop": "nome próprio"})
-        pos.update({"art": "artigo"})
-        pos.update({"pron": "pronome"})
-        pos.update({"pron-pers": "pronome pessoal"})
-        pos.update({"pron-det": "pronome determinativo"})
-        pos.update({"pron-indp": "substantivo/pron-indp"})
-        pos.update({"adj": "adjetivo"})
-        pos.update({"n-adj": "substantivo/adjetivo"})
-        pos.update({"v": "verbo"})
-        pos.update({"v-fin": "verbo finitivo"})
-        pos.update({"v-inf": "verbo infinitivo"})
-        pos.update({"v-pcp": "verbo particípio"})
-        pos.update({"v-ger": "verbo gerúndio"})
-        pos.update({"num": "numeral"})
-        pos.update({"prp": "preposição"})
-        pos.update({"adj": "adjetivo"})
-        pos.update({"conj": "conjunção"})
-        pos.update({"conj-s": "conjunção subordinativa"})
-        pos.update({"conj-c": "conjunção coordenativa"})
-        pos.update({"intj": "interjeição"})
-        pos.update({"adv": "advérbio"})
-        pos.update({"xxx": "outro"})
-        return pos
+    pos_tags = {
+        "n": "substantivo",
+        "prop": "nome próprio",
+        "art": "artigo",
+        "pron": "pronome",
+        "pron-pers": "pronome pessoal",
+        "pron-det": "pronome determinativo",
+        "pron-indp": "substantivo/pron-indp",
+        "n-adj": "substantivo/adjetivo",
+        "v": "verbo",
+        "v-fin": "verbo finitivo",
+        "v-inf": "verbo infinitivo",
+        "v-pcp": "verbo particípio",
+        "v-ger": "verbo gerúndio",
+        "num": "numeral",
+        "prp": "preposição",
+        "adj": "adjetivo",
+        "conj": "conjunção",
+        "conj-s": "conjunção subordinativa",
+        "conj-c": "conjunção coordenativa",
+        "intj": "interjeição",
+        "adv": "advérbio",
+        "xxx": "outro"
+    }
 	
 	# pos: "part of speech"
 	pos = cogroo.pos_tags
@@ -106,7 +104,7 @@ O corretor gramatical do CoGrOO verifica a colocação pronominal, concordância
 Este projeto utiliza o jpype para se comunicar com a Java Native Interface (JNI) e utilizar as classes do Cogroo
 
 Requirements:
-* Java 8
+* Java (compilado na versão 8, porém os testes unitários rodam entre a versão 8 e 17 do JDK)
 
 ## Configuração do ambiente de desenvolvimento
 * É recomendável utilizar um virtual environment (venv)

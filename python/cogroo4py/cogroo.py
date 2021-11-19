@@ -319,7 +319,8 @@ class Cogroo:
         "conj-c": "conjunção coordenativa",
         "intj": "interjeição",
         "adv": "advérbio",
-        "xxx": "outro"}
+        "xxx": "outro"
+    }
 
     feat_tags = {
         "M": "masculino",
