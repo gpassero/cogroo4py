@@ -127,11 +127,6 @@ class ToStringHelper:
     @staticmethod
     def toStringHelper(string: str) -> 'ToStringHelper': ...
 
-class TokenTagUtil:
-    def __init__(self): ...
-    @staticmethod
-    def extract(tokenTagArray: typing.List[opennlp.tools.util.TokenTag], stringArray: typing.List[str], stringArray2: typing.List[str], stringArray3: typing.List[str]) -> None: ...
-
 
 class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.cogroo.util")``.
@@ -146,5 +141,4 @@ class __module_protocol__(typing.Protocol):
     StringsUtil: typing.Type[StringsUtil]
     TextUtils: typing.Type[TextUtils]
     ToStringHelper: typing.Type[ToStringHelper]
-    TokenTagUtil: typing.Type[TokenTagUtil]
     serializers: org.cogroo.util.serializers.__module_protocol__

@@ -1,4 +1,5 @@
 import org.cogroo.tools.checker
+import org.cogroo.tools.chunker2
 import org.cogroo.tools.errorreport
 import org.cogroo.tools.featurizer
 import org.cogroo.tools.headfinder
@@ -13,6 +14,7 @@ class __module_protocol__(typing.Protocol):
     # A module protocol which reflects the result of ``jp.JPackage("org.cogroo.tools")``.
 
     checker: org.cogroo.tools.checker.__module_protocol__
+    chunker2: org.cogroo.tools.chunker2.__module_protocol__
     errorreport: org.cogroo.tools.errorreport.__module_protocol__
     featurizer: org.cogroo.tools.featurizer.__module_protocol__
     headfinder: org.cogroo.tools.headfinder.__module_protocol__

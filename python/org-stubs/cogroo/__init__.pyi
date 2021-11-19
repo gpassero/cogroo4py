@@ -16,7 +16,6 @@ import org.cogroo.exceptions
 import org.cogroo.formats
 import org.cogroo.gc
 import org.cogroo.interpreters
-import org.cogroo.ruta
 import org.cogroo.text
 import org.cogroo.tools
 import org.cogroo.util
@@ -84,7 +83,6 @@ class __module_protocol__(typing.Protocol):
     formats: org.cogroo.formats.__module_protocol__
     gc: org.cogroo.gc.__module_protocol__
     interpreters: org.cogroo.interpreters.__module_protocol__
-    ruta: org.cogroo.ruta.__module_protocol__
     text: org.cogroo.text.__module_protocol__
     tools: org.cogroo.tools.__module_protocol__
     util: org.cogroo.util.__module_protocol__

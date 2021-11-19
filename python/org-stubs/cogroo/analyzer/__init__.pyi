@@ -1,7 +1,6 @@
 import java.io
 import java.lang
 import java.util
-import opennlp.tools.chunker
 import opennlp.tools.namefind
 import opennlp.tools.postag
 import opennlp.tools.sentdetect
@@ -9,6 +8,7 @@ import opennlp.tools.tokenize
 import opennlp.tools.util
 import org.cogroo.dictionary
 import org.cogroo.text
+import org.cogroo.tools.chunker2
 import org.cogroo.tools.featurizer
 import typing
 
@@ -33,7 +33,7 @@ class InitializationException(java.lang.RuntimeException):
     def __init__(self, string: str, throwable: java.lang.Throwable): ...
 
 class Chunker(Analyzer):
-    def __init__(self, chunkerME: opennlp.tools.chunker.ChunkerME): ...
+    def __init__(self, chunkerME: org.cogroo.tools.chunker2.ChunkerME): ...
     def analyze(self, document: org.cogroo.text.Document) -> None: ...
 
 class ComponentFactory(ComponentFactoryI):
@@ -64,7 +64,7 @@ class Featurizer(Analyzer):
     def analyze(self, document: org.cogroo.text.Document) -> None: ...
 
 class HeadFinder(Analyzer):
-    def __init__(self, chunkerME: opennlp.tools.chunker.ChunkerME): ...
+    def __init__(self, chunkerME: org.cogroo.tools.chunker2.ChunkerME): ...
     def analyze(self, document: org.cogroo.text.Document) -> None: ...
 
 class Lemmatizer(Analyzer):
@@ -91,7 +91,7 @@ class SentenceDetector(Analyzer):
     def analyze(self, document: org.cogroo.text.Document) -> None: ...
 
 class ShallowParser(Analyzer):
-    def __init__(self, chunkerME: opennlp.tools.chunker.ChunkerME): ...
+    def __init__(self, chunkerME: org.cogroo.tools.chunker2.ChunkerME): ...
     def analyze(self, document: org.cogroo.text.Document) -> None: ...
 
 class Tokenizer(Analyzer):

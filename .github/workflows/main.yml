@@ -26,7 +26,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest flake8 pytest-cov
           cd python
-          pip install .
+          pip install .[dev]
       - name: Lint with flake8
         run: |
           # stop the build if there are Python syntax errors or undefined names
