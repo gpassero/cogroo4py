@@ -15,10 +15,10 @@ jpype_stubs_paths = package_files('jpype-stubs') + ['../py.typed']
 org_stubs_paths = package_files('org-stubs') + ['../py.typed']
 
 setup(name='cogroo4py',
-      version='0.4.3',
+      version='0.4.4',
       description='Interface for accessing CoGrOO from Python scripts using jpype',
-      author='Guilherme Passero',
-      author_email='guilherme.passero0@gmail.com',
+      author='Guilherme Passero, Keven Carneiro',
+      author_email='guilherme.passero0@gmail.com, kevencarneiro@outlook.com',
       url='https://github.com/kevencarneiro/cogroo4py',
       include_package_data=True,
       packages=['cogroo_interface', 'cogroo4py', 'java-stubs', 'jpype-stubs', 'org-stubs'],

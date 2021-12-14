@@ -381,13 +381,3 @@ class Cogroo:
         "SUBJ": "sujeito",
         "xxx": "outro"
     }
-
-
-def main():
-    cogroo = Cogroo()
-    cogroo.lemmatize('o entendimento das metas propostas oferece uma interessante oportunidade para ' +
-                     'verificação do impacto na agilidade decisória')
-
-
-if __name__ == '__main__':
-    main()
