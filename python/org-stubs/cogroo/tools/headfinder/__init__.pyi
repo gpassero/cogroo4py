@@ -1,0 +1,33 @@
+import opennlp.tools.util
+import org.cogroo.tools.chunker2
+import typing
+
+
+
+class HeadFinderContextGenerator(org.cogroo.tools.chunker2.ChunkerContextGenerator):
+    def __init__(self): ...
+    @typing.overload
+    def getContext(self, int: int, stringArray: typing.List[str], stringArray2: typing.List[str], stringArray3: typing.List[str]) -> typing.List[str]: ...
+    @typing.overload
+    def getContext(self, int: int, stringArray: typing.List[str], stringArray2: typing.List[str], stringArray3: typing.List[str], stringArray4: typing.List[str]) -> typing.List[str]: ...
+    @typing.overload
+    def getContext(self, int: int, tokenTagArray: typing.List[org.cogroo.tools.chunker2.TokenTag], stringArray: typing.List[str]) -> typing.List[str]: ...
+    @typing.overload
+    def getContext(self, int: int, tokenTagArray: typing.List[org.cogroo.tools.chunker2.TokenTag], stringArray: typing.List[str], objectArray: typing.List[typing.Any]) -> typing.List[str]: ...
+
+class HeadFinderFactory(org.cogroo.tools.chunker2.ChunkerFactory):
+    def __init__(self): ...
+    def getContextGenerator(self) -> org.cogroo.tools.chunker2.ChunkerContextGenerator: ...
+    def getSequenceValidator(self) -> opennlp.tools.util.SequenceValidator[org.cogroo.tools.chunker2.TokenTag]: ...
+
+class HeadFinderSequenceValidator(opennlp.tools.util.SequenceValidator[org.cogroo.tools.chunker2.TokenTag]):
+    def __init__(self): ...
+    def validSequence(self, int: int, tokenTagArray: typing.List[org.cogroo.tools.chunker2.TokenTag], stringArray: typing.List[str], string2: str) -> bool: ...
+
+
+class __module_protocol__(typing.Protocol):
+    # A module protocol which reflects the result of ``jp.JPackage("org.cogroo.tools.headfinder")``.
+
+    HeadFinderContextGenerator: typing.Type[HeadFinderContextGenerator]
+    HeadFinderFactory: typing.Type[HeadFinderFactory]
+    HeadFinderSequenceValidator: typing.Type[HeadFinderSequenceValidator]

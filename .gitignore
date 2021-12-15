@@ -1,9 +1,15 @@
-.vscode/
-__pycache__
-build/
-server/.settings/
-server/bin/
-server/META-INF/
-server/target/
-server/.classpath
-server/.project
+# Compiled python modules.
+*.pyc
+
+# Setuptools distribution folder.
+**/dist/
+**/build/
+
+# Python egg metadata, regenerated from source files by setuptools.
+**/*.egg-info
+
+**/.idea/*
+
+java/target/**/*
+python/cogroo4py/jars/**/*
+python/wheels/**/*

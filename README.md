@@ -1,39 +1,28 @@
 # CoGrOO4Py
+[![Build Status](https://github.com/kevencarneiro/cogroo4py/actions/workflows/main.yml/badge.svg)](https://github.com/kevencarneiro/cogroo4py/actions/workflows/main.yml)
+[![codecov](https://codecov.io/gh/kevencarneiro/cogroo4py/branch/master/graph/badge.svg)](https://codecov.io/gh/kevencarneiro/cogroo4py)
+[![PyPI version](https://badge.fury.io/py/cogroo4py.svg)](https://badge.fury.io/py/cogroo4py)
 
 Uma interface para acessar o analisador morfológico e o corretor gramatical do CoGrOO em Python.
 
 # Pré-requisitos
-
-- interpretador Python 3.x
-- Pacote py4j (_pip install py4j_)
-- Java Runtime Environment 8
+ - interpretador Python 3.x
+ - Java Runtime Environment (Testado nas versões 8, 11 e 17)
 
 # Como usar
-
-Baixe os arquivos **cogroo_interface.py** e **setup.py** e instale o pacote com o comando:
-
-```
-    python setup.py install
-```
-
-Se preferir, instale a partir do GitHub pelo pip:
+Instale usando o pip:
 
 ```
-    pip install git+https://github.com/gpassero/cogroo4py.git
+    pip install cogroo4py
 ```
 
-É necessário executar o arquivo **cogroo4py.jar** para ativar o Socket que permitirá a comunicação do Python com a JVM através do py4j. Todos os componentes do CoGrOO 4 necessários já estão nesse pacote.
+É necessário que o executável `java` esteja definido em seu `path`
 
-```
-    java -jar cogroo4py.jar
-    Gateway Server Started
-```
-
-Após isso, em uma IDE Python de sua preferência (ex. IPython, Spyder), importe e instancie a classe _Cogroo_.
+Em uma IDE Python de sua preferência (ex. IPython, Spyder), importe e instancie a classe *Cogroo*.
 
 ```python
-    from cogroo_interface import Cogroo
-    cogroo = Cogroo.Instance()
+    from cogroo4py.cogroo import Cogroo
+    cogroo = Cogroo()
 ```
 
 Agora você já pode usar os recursos do CoGrOO. Esta interface disponibiliza métodos para retornar uma análise morfológica completa de um documento, lematizar, identificar partes do discurso, dividir em chunks e verificar erros gramaticais.
@@ -60,33 +49,31 @@ A análise morfológica consiste em identificar a classe gramatical das palavras
 O método de análise morfológica do CoGrOO usa etiquetas (_tags_) específicas para cada caso, que podem ser difíceis de entender em um primeiro momento. O dicionário _pos_tags_ da classe **Cogroo** permite traduzir as etiquetas geradas pelo CoGrOO para um formato legível em português:
 
 ```python
-    def _pos_tags(self):
-        pos = {}
-        pos.update({"n": "substantivo"})
-        pos.update({"prop": "nome próprio"})
-        pos.update({"art": "artigo"})
-        pos.update({"pron": "pronome"})
-        pos.update({"pron-pers": "pronome pessoal"})
-        pos.update({"pron-det": "pronome determinativo"})
-        pos.update({"pron-indp": "substantivo/pron-indp"})
-        pos.update({"adj": "adjetivo"})
-        pos.update({"n-adj": "substantivo/adjetivo"})
-        pos.update({"v": "verbo"})
-        pos.update({"v-fin": "verbo finitivo"})
-        pos.update({"v-inf": "verbo infinitivo"})
-        pos.update({"v-pcp": "verbo particípio"})
-        pos.update({"v-ger": "verbo gerúndio"})
-        pos.update({"num": "numeral"})
-        pos.update({"prp": "preposição"})
-        pos.update({"adj": "adjetivo"})
-        pos.update({"conj": "conjunção"})
-        pos.update({"conj-s": "conjunção subordinativa"})
-        pos.update({"conj-c": "conjunção coordenativa"})
-        pos.update({"intj": "interjeição"})
-        pos.update({"adv": "advérbio"})
-        pos.update({"xxx": "outro"})
-        return pos
-
+    pos_tags = {
+        "n": "substantivo",
+        "prop": "nome próprio",
+        "art": "artigo",
+        "pron": "pronome",
+        "pron-pers": "pronome pessoal",
+        "pron-det": "pronome determinativo",
+        "pron-indp": "substantivo/pron-indp",
+        "n-adj": "substantivo/adjetivo",
+        "v": "verbo",
+        "v-fin": "verbo finitivo",
+        "v-inf": "verbo infinitivo",
+        "v-pcp": "verbo particípio",
+        "v-ger": "verbo gerúndio",
+        "num": "numeral",
+        "prp": "preposição",
+        "adj": "adjetivo",
+        "conj": "conjunção",
+        "conj-s": "conjunção subordinativa",
+        "conj-c": "conjunção coordenativa",
+        "intj": "interjeição",
+        "adv": "advérbio",
+        "xxx": "outro"
+    }
+	
 	# pos: "part of speech"
 	pos = cogroo.pos_tags
 	pos['n']
@@ -115,8 +102,30 @@ O corretor gramatical do CoGrOO verifica a colocação pronominal, concordância
 	# [[xml:124] O adjetivo na função de predicativo concorda com o sujeito.]
 ```
 
-# Sobre o CoGrOO
+# Contribuindo
 
+Este projeto utiliza o jpype para se comunicar com a Java Native Interface (JNI) e utilizar as classes do Cogroo
+
+Requirements:
+* Java (compilado na versão 8, porém os testes unitários rodam entre a versão 8 e 17 do JDK)
+
+## Configuração do ambiente de desenvolvimento
+* É recomendável utilizar um virtual environment (venv)
+* Na raiz do projeto python, execute o comando `pip install -e .[dev]`
+
+## Atualizando as dependências do Java
+* `cd java`
+* `mvn package`
+
+Este comando irá atualizar o arquivo `/python/cogroo4py/jars/Cogroo4PyBridge.jar`
+
+## Regerando os stubs python
+* `cd python/cogroo4py`
+* `python generate_stubs.py`
+
+Os stubs servirão para o autocomplete das classes Java utilizadas dentro do python
+
+# Sobre o CoGrOO 
 Código fonte e informações sobre o projeto:
 http://cogroo.sourceforge.net/
 https://github.com/cogroo/cogroo4

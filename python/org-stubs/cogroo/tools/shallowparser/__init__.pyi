@@ -1,0 +1,39 @@
+import opennlp.tools.util
+import org.cogroo.tools.chunker2
+import org.cogroo.tools.featurizer
+import typing
+
+
+
+class ShallowParserContextGenerator(org.cogroo.tools.chunker2.ChunkerContextGenerator):
+    def __init__(self): ...
+    @typing.overload
+    def getContext(self, int: int, stringArray: typing.List[str], stringArray2: typing.List[str], stringArray3: typing.List[str]) -> typing.List[str]: ...
+    @typing.overload
+    def getContext(self, int: int, stringArray: typing.List[str], stringArray2: typing.List[str], stringArray3: typing.List[str], stringArray4: typing.List[str]) -> typing.List[str]: ...
+    @typing.overload
+    def getContext(self, int: int, tokenTagArray: typing.List[org.cogroo.tools.chunker2.TokenTag], stringArray: typing.List[str]) -> typing.List[str]: ...
+    @typing.overload
+    def getContext(self, int: int, tokenTagArray: typing.List[org.cogroo.tools.chunker2.TokenTag], stringArray: typing.List[str], objectArray: typing.List[typing.Any]) -> typing.List[str]: ...
+    @staticmethod
+    def phrasesAsSpanList(stringArray: typing.List[str]) -> typing.List[opennlp.tools.util.Span]: ...
+
+class ShallowParserFactory(org.cogroo.tools.chunker2.ChunkerFactory):
+    def __init__(self): ...
+    def getContextGenerator(self) -> org.cogroo.tools.chunker2.ChunkerContextGenerator: ...
+    def getSequenceValidator(self) -> opennlp.tools.util.SequenceValidator[org.cogroo.tools.chunker2.TokenTag]: ...
+
+class ShallowParserSequenceValidator(org.cogroo.tools.chunker2.DefaultChunkerSequenceValidator):
+    def __init__(self): ...
+    @typing.overload
+    def validSequence(self, int: int, tokenTagArray: typing.List[org.cogroo.tools.chunker2.TokenTag], stringArray: typing.List[str], string2: str) -> bool: ...
+    @typing.overload
+    def validSequence(self, int: int, wordTagArray: typing.List[org.cogroo.tools.featurizer.WordTag], stringArray: typing.List[str], string2: str) -> bool: ...
+
+
+class __module_protocol__(typing.Protocol):
+    # A module protocol which reflects the result of ``jp.JPackage("org.cogroo.tools.shallowparser")``.
+
+    ShallowParserContextGenerator: typing.Type[ShallowParserContextGenerator]
+    ShallowParserFactory: typing.Type[ShallowParserFactory]
+    ShallowParserSequenceValidator: typing.Type[ShallowParserSequenceValidator]

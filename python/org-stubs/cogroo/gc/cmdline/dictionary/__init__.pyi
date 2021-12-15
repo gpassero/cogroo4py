@@ -1,0 +1,29 @@
+import java.io
+import java.util
+import opennlp.tools.cmdline
+import opennlp.tools.postag
+import org.cogroo.interpreters
+import typing
+
+
+
+class POSDictionaryBuilderTool(opennlp.tools.cmdline.BasicCmdLineTool):
+    def __init__(self): ...
+    def getHelp(self) -> str: ...
+    def getShortDescription(self) -> str: ...
+    def run(self, stringArray: typing.List[str]) -> None: ...
+
+class TabSeparatedPOSDictionaryBuilderTool(opennlp.tools.cmdline.BasicCmdLineTool):
+    def __init__(self): ...
+    def getHelp(self) -> str: ...
+    def getShortDescription(self) -> str: ...
+    @staticmethod
+    def parseOneEntryPerLine(reader: java.io.Reader, sortedMap: java.util.SortedMap[str, java.util.Set[opennlp.tools.postag.Triple]], tagInterpreter: org.cogroo.interpreters.TagInterpreter, tagInterpreter2: org.cogroo.interpreters.TagInterpreter, set: java.util.Set[str], set2: java.util.Set[str], boolean: bool, boolean2: bool) -> None: ...
+    def run(self, stringArray: typing.List[str]) -> None: ...
+
+
+class __module_protocol__(typing.Protocol):
+    # A module protocol which reflects the result of ``jp.JPackage("org.cogroo.gc.cmdline.dictionary")``.
+
+    POSDictionaryBuilderTool: typing.Type[POSDictionaryBuilderTool]
+    TabSeparatedPOSDictionaryBuilderTool: typing.Type[TabSeparatedPOSDictionaryBuilderTool]
