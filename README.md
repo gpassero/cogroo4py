@@ -25,16 +25,17 @@ Em uma IDE Python de sua preferência (ex. IPython, Spyder), importe e instancie
     cogroo = Cogroo()
 ```
 
-Agora você já pode usar os recursos do CoGrOO. Esta interface disponibiliza métodos para retornar uma análise morfológica completa de um documento, lematizar, identificar partes do discurso, dividir em chunks e verificar erros gramaticais. 
+Agora você já pode usar os recursos do CoGrOO. Esta interface disponibiliza métodos para retornar uma análise morfológica completa de um documento, lematizar, identificar partes do discurso, dividir em chunks e verificar erros gramaticais.
 
 ## Lematizando
+
 A lematização consiste em obter o lema das palavras de um texto. O lema é uma versão da palavra que representa todas as suas flexões. Os verbos são alterados para o infinitivo e substantivos e adjetivos são flexionados para o masculino do singular.
 
-		[estava, estaria, estive, estarei, estar] => estar
-		[fui, vou, ire, iremos] => ir
-		[gato, gatinho, gatão, gata, gatos] => gato
+    	[estava, estaria, estive, estarei, estar] => estar
+    	[fui, vou, irei, iremos] => ir
+    	[gato, gatinho, gatão, gata, gatos] => gato
 
-A lematização é uma alternativa ao *stemming*, um algoritmo que tenta detectar sufixos e removê-los com base nas regras comuns da língua, mas que falha em tratar exceções. A lematização, diferentemente do *stemming*, usa um dicionário morfológico para encontrar o radical das palavras.
+A lematização é uma alternativa ao _stemming_, um algoritmo que tenta detectar sufixos e removê-los com base nas regras comuns da língua, mas que falha em tratar exceções. A lematização, diferentemente do _stemming_, usa um dicionário morfológico para encontrar o radical das palavras.
 
 ```python
     cogroo.lemmatize('Estas laranjas estão deliciosas.')
@@ -42,9 +43,10 @@ A lematização é uma alternativa ao *stemming*, um algoritmo que tenta detecta
 ```
 
 ## Análise morfológica
+
 A análise morfológica consiste em identificar a classe gramatical das palavras de um texto. As classes possíveis são: substantivos, adjetivos, artigos, pronomes, numeral, verbo, advérbio, preposição, conjunção e interjeição.
 
-O método de análise morfológica do CoGrOO usa etiquetas (*tags*) específicas para cada caso, que podem ser difíceis de entender em um primeiro momento. O dicionário *pos_tags* da classe **Cogroo** permite traduzir as etiquetas geradas pelo CoGrOO para um formato legível em português:
+O método de análise morfológica do CoGrOO usa etiquetas (_tags_) específicas para cada caso, que podem ser difíceis de entender em um primeiro momento. O dicionário _pos_tags_ da classe **Cogroo** permite traduzir as etiquetas geradas pelo CoGrOO para um formato legível em português:
 
 ```python
     pos_tags = {
@@ -78,7 +80,7 @@ O método de análise morfológica do CoGrOO usa etiquetas (*tags*) específicas
 	# substantivo
 ```
 
-No contexto de Processamento de Linguagem Natural as palavras e caracteres de pontuação são normalmente tratados como *tokens*. O método *analyze* associa uma das etiquetas acima para cada *token* de um texto. Também são anotadas algumas *features* que indicam a flexão das palavras, ex. **F=P => *feminino, plural***.
+No contexto de Processamento de Linguagem Natural as palavras e caracteres de pontuação são normalmente tratados como _tokens_. O método _analyze_ associa uma das etiquetas acima para cada _token_ de um texto. Também são anotadas algumas _features_ que indicam a flexão das palavras, ex. **F=P => _feminino, plural_**.
 
 ```python
     doc = cogroo.analyze('Estas laranjas estão deliciosas.')
@@ -88,9 +90,10 @@ No contexto de Processamento de Linguagem Natural as palavras e caracteres de po
     #   estão#v-fin PR=3P=IND,
     #   deliciosas#adj F=P,
     #   .#. -]
- ```
- 
+```
+
 ## Corretor gramatical
+
 O corretor gramatical do CoGrOO verifica a colocação pronominal, concordância nominal, concordância entre sujeito e verbo, concordância verbal, uso de crase, regência nominal, regência verbal e outros erros comuns da língua portuguesa escrita. Mais detalhes sobre as regras aplicadas podem ser encontrados em http://comunidade.cogroo.org/rules.
 
 ```python
