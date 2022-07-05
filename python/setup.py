@@ -36,7 +36,7 @@ setup(name='cogroo4py',
           'jpype-stubs': jpype_stubs_paths,
           'org-stubs': org_stubs_paths
       },
-      install_requires=['JPype1==1.3.0', 'Deprecated==1.2.13'],
+      install_requires=['JPype1==1.4.0', 'Deprecated==1.2.13'],
       extras_require={
           'dev': ['stubgenj==0.2.5']
       },
